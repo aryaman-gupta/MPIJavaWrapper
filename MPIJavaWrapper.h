@@ -11,7 +11,7 @@ extern "C" {
  * Method:    init
  * Signature: ([Ljava/lang/String;)V
  */
-JNIEXPORT void JNICALL Java_graphics_scenery_natives_graphics_scenery_natives_MPIJavaWrapper_init
+JNIEXPORT void JNICALL Java_graphics_scenery_natives_MPIJavaWrapper_init
   (JNIEnv *, jclass, jobjectArray);
 
 /*
@@ -19,7 +19,7 @@ JNIEXPORT void JNICALL Java_graphics_scenery_natives_graphics_scenery_natives_MP
  * Method:    finalizeMPI
  * Signature: ()V
  */
-JNIEXPORT void JNICALL Java_graphics_scenery_natives_graphics_scenery_natives_MPIJavaWrapper_finalizeMPI
+JNIEXPORT void JNICALL Java_graphics_scenery_natives_MPIJavaWrapper_finalizeMPI
   (JNIEnv *, jclass);
 
 /*
@@ -27,7 +27,7 @@ JNIEXPORT void JNICALL Java_graphics_scenery_natives_graphics_scenery_natives_MP
  * Method:    commRank
  * Signature: ()I
  */
-JNIEXPORT jint JNICALL Java_graphics_scenery_natives_graphics_scenery_natives_MPIJavaWrapper_commRank
+JNIEXPORT jint JNICALL Java_graphics_scenery_natives_MPIJavaWrapper_commRank
   (JNIEnv *, jclass);
 
 /*
@@ -35,7 +35,7 @@ JNIEXPORT jint JNICALL Java_graphics_scenery_natives_graphics_scenery_natives_MP
  * Method:    commSize
  * Signature: ()I
  */
-JNIEXPORT jint JNICALL Java_graphics_scenery_natives_graphics_scenery_natives_MPIJavaWrapper_commSize
+JNIEXPORT jint JNICALL Java_graphics_scenery_natives_MPIJavaWrapper_commSize
   (JNIEnv *, jclass);
 
 /*
@@ -43,7 +43,7 @@ JNIEXPORT jint JNICALL Java_graphics_scenery_natives_graphics_scenery_natives_MP
  * Method:    send
  * Signature: ([BII)V
  */
-JNIEXPORT void JNICALL Java_graphics_scenery_natives_graphics_scenery_natives_MPIJavaWrapper_send
+JNIEXPORT void JNICALL Java_graphics_scenery_natives_MPIJavaWrapper_send
   (JNIEnv *, jclass, jbyteArray, jint, jint);
 
 /*
@@ -61,6 +61,14 @@ JNIEXPORT jbyteArray JNICALL Java_graphics_scenery_natives_MPIJavaWrapper_recv
  */
 JNIEXPORT void JNICALL Java_graphics_scenery_natives_MPIJavaWrapper_bcast
   (JNIEnv *, jclass, jbyteArray, jint);
+
+/*
+ * Class:     graphics_scenery_natives_MPIJavaWrapper
+ * Method:    gather
+ * Signature: ([BI[BI I)V
+ */
+JNIEXPORT void JNICALL Java_graphics_scenery_natives_MPIJavaWrapper_gather
+  (JNIEnv *, jclass, jbyteArray, jint, jbyteArray, jint, jint);
 
 #ifdef __cplusplus
 }
