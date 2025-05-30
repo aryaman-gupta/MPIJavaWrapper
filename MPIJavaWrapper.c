@@ -99,3 +99,29 @@ JNIEXPORT void JNICALL Java_graphics_scenery_natives_MPIJavaWrapper_bcast
     (*env)->ReleaseByteArrayElements(env, jdata, data, 0);
 }
 
+JNIEXPORT void JNICALL Java_graphics_scenery_natives_MPIJavaWrapper_gather
+  (JNIEnv *env, jclass clazz, jbyteArray jsendbuf, jint sendcount, jbyteArray jrecvbuf, jint recvcount, jint root)
+{
+    jbyte *sendbuf = (*env)->GetByteArrayElements(env, jsendbuf, NULL);
+    jbyte *recvbuf = NULL;
+    if (jrecvbuf != NULL) {
+        recvbuf = (*env)->GetByteArrayElements(env, jrecvbuf, NULL);
+    }
+
+    int mpiInitialized;
+    MPI_Initialized(&mpiInitialized);
+    if (!mpiInitialized) {
+        MPI_Init(NULL, NULL);
+    }
+
+    MPI_Gather(sendbuf, sendcount, MPI_BYTE,
+               recvbuf, recvcount, MPI_BYTE,
+               root, MPI_COMM_WORLD);
+
+    int rank;
+    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+    if (recvbuf != NULL && rank == root) {
+        (*env)->ReleaseByteArrayElements(env, jrecvbuf, recvbuf, 0);
+    }
+    (*env)->ReleaseByteArrayElements(env, jsendbuf, sendbuf, JNI_ABORT);
+}
